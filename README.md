@@ -1,6 +1,8 @@
 
 # Hourglass Timer Plugin for Homebridge
 
+For Advanced HomeKit Shortcuts Automation
+
 Example config.json:
 
 ```
