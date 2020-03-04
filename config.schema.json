@@ -1,0 +1,33 @@
+{
+    "pluginAlias": "Hourglass",
+    "pluginType": "accessory",
+    "singular": false,
+    "schema": {
+        "type": "object",
+        "properties": {
+            "name": {
+                "title": "Name",
+                "type": "string",
+                "required": true
+            },
+            "tick": {
+                "title": "Tick",
+                "type": "number",
+                "default": 1000,
+                "description": "Timeout in milliseconds"
+            },
+            "step": {
+                "title": "Step",
+                "type": "number",
+                "default": 1,
+                "description": "From 1 to 100%"
+            },
+            "resumeAfterStop": {
+                "title": "Resume After Stop",
+                "type": "boolean",
+                "default": false,
+                "description": "Continue from the previous position after stop"
+            }
+        }
+    }
+}
