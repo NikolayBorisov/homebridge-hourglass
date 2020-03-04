@@ -3,7 +3,7 @@
 
 For Advanced HomeKit Shortcuts Automation
 
-<img src="https://github.com/NikolayBorisov/homebridge-hourglass/blob/master/demo.gif" height="700">
+<img src="https://github.com/NikolayBorisov/homebridge-hourglass/blob/master/demo.gif?2" height="700">
 
 Example config.json:
 
