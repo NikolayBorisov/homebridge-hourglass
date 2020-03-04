@@ -1,5 +1,5 @@
 
-# "Hourglass" Plugin
+# Hourglass Homebridge Plugin
 
 Example config.json:
 
