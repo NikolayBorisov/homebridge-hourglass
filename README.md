@@ -31,7 +31,7 @@ You can do this by passing an argument in your config.json:
 
 ```
 
-## Reverse Switches
+## Reverse Hourglass
 
 NOT YET IMPLEMENTED
 
