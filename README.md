@@ -1,5 +1,5 @@
 
-# Hourglass Homebridge Plugin
+# Hourglass Timer Plugin for Homebridge
 
 Example config.json:
 
