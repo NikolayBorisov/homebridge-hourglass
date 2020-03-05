@@ -22,6 +22,12 @@
                 "default": 1,
                 "description": "From 1 to 100%"
             },
+            "type": {
+                "title": "Hourglass Type",
+                "type": "string",
+                "default": "fan",
+                "description": "fan or bulb type"
+            },
             "resumeAfterStop": {
                 "title": "Resume After Stop",
                 "type": "boolean",
