@@ -18,7 +18,12 @@ Example config.json:
           "name": "My Hourglass 1",
           "tick": 500,
           "step": 10
-        }   
+        },
+        {
+          "accessory": "Hourglass",
+          "name": "My Hourglass 2",
+          "tick": 5000
+        }
     ]
 
 ```
