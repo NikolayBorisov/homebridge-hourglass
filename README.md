@@ -3,6 +3,10 @@
 
 For Advanced HomeKit Shortcuts Automation
 
+```
+npm install homebridge-hourglass
+```
+
 <img src="https://raw.githubusercontent.com/NikolayBorisov/homebridge-hourglass/master/demo.gif">
 
 Example config.json:
