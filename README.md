@@ -7,6 +7,8 @@ For Advanced HomeKit Shortcuts Automation
 npm install homebridge-hourglass
 ```
 
+Now you can choose type of your hourglass!
+
 <img src="https://raw.githubusercontent.com/NikolayBorisov/homebridge-hourglass/master/demo.gif">
 
 Example config.json:
@@ -17,12 +19,14 @@ Example config.json:
           "accessory": "Hourglass",
           "name": "My Hourglass 1",
           "tick": 500,
-          "step": 10
+          "step": 10,
+          "type": "bulb"
         },
         {
           "accessory": "Hourglass",
           "name": "My Hourglass 2",
-          "tick": 5000
+          "tick": 5000,
+          "type": "fan"
         }
     ]
 

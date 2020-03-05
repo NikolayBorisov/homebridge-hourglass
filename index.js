@@ -13,15 +13,29 @@ function Hourglass(log, config) {
   this.interval = null;
   this.resumeAfterStop = config.resumeAfterStop;
   this.name = config.name;
+  this.type = config.type || 'fan';
   this.step = config.step || 1;
   this.tick = config.tick || 1000;
   this.curr = 0;
-  this.service = new Service.Lightbulb(this.name, "Timer Light");
 
-  this.service.getCharacteristic(Characteristic.Brightness)
-    .on('set', this.setBrightness.bind(this));
+  if (this.type === 'fan') {
+    this.service = new Service.Fanv2(this.name, "Timer");
+    this.Characteristic = {
+      Timer: Characteristic.RotationSpeed,
+      On: Characteristic.Active
+    };
+  } else if (this.type === 'bulb') {
+    this.service = new Service.Lightbulb(this.name, "Timer");
+    this.Characteristic = {
+      Timer: Characteristic.Brightness,
+      On: Characteristic.On
+    };
+  }
 
-  this.service.getCharacteristic(Characteristic.On)
+  this.service.getCharacteristic(this.Characteristic.Timer)
+    .on('set', this.setTimer.bind(this));
+
+  this.service.getCharacteristic(this.Characteristic.On)
     .on('set', this.setOn.bind(this));
 }
 
@@ -30,18 +44,18 @@ Hourglass.prototype.onTick = function () {
 
   this.curr++;
 
-  let brightness = 100 - this.curr * this.step;
+  let timer = 100 - this.curr * this.step;
 
-  this.log("Proposed brightness → " + brightness);
+  this.log("Proposed timer → " + timer);
 
-  if (brightness <= 0) {
-    this.service.setCharacteristic(Characteristic.Brightness, 0);
+  if (timer <= 0) {
+    this.service.setCharacteristic(this.Characteristic.Timer, 0);
     this.stop();
-  } else if (brightness > 100) {
-    brightness = 100;
-    this.service.setCharacteristic(Characteristic.Brightness, 100);
+  } else if (timer > 100) {
+    timer = 100;
+    this.service.setCharacteristic(this.Characteristic.Timer, 100);
   } else {
-    this.service.setCharacteristic(Characteristic.Brightness, brightness);
+    this.service.setCharacteristic(this.Characteristic.Timer, timer);
   }
 }
 
@@ -53,7 +67,7 @@ Hourglass.prototype.stop = function () {
     }
     clearInterval(this.interval);
     this.interval = null;
-    this.service.setCharacteristic(Characteristic.On, false);
+    this.service.setCharacteristic(this.Characteristic.On, false);
   }
 }
 
@@ -62,15 +76,15 @@ Hourglass.prototype.start = function () {
   if (this.interval === null) {
     this.log("setInterval");
     this.interval = setInterval(this.onTick.bind(this), this.tick);
-    this.service.setCharacteristic(Characteristic.On, true);
+    this.service.setCharacteristic(this.Characteristic.On, true);
   }
 }
 
-Hourglass.prototype.setBrightness = function (brightness, callback) {
-  this.log("setBrightness → " + brightness);
+Hourglass.prototype.setTimer = function (timer, callback) {
+  this.log("setTimer → " + timer);
 
-  if (brightness > 0) {
-    this.curr = (100 - brightness) / this.step;
+  if (timer > 0) {
+    this.curr = (100 - timer) / this.step;
     this.start();
   } else {
     this.stop();
@@ -88,7 +102,7 @@ Hourglass.prototype.setOn = function (on, callback) {
     this.stop();
 
     if (!this.resumeAfterStop) {
-      this.service.setCharacteristic(Characteristic.Brightness, 0);
+      this.service.setCharacteristic(this.Characteristic.Timer, 0);
     }
   }
 
