@@ -48,6 +48,20 @@ You can do this by passing an argument in your config.json:
 
 ```
 
+## Log & Debug
+
+To enable verbose logging
+
+```
+    "accessories": [
+        {
+          ...
+          "log": true
+        }
+    ]
+
+```
+
 ## Reverse Hourglass
 
 NOT YET IMPLEMENTED
