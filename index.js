@@ -9,7 +9,6 @@ module.exports = function (homebridge) {
 }
 
 function Hourglass(log, config) {
-  this.log = log;
   this.interval = null;
   this.resumeAfterStop = config.resumeAfterStop;
   this.name = config.name;
@@ -17,6 +16,12 @@ function Hourglass(log, config) {
   this.step = config.step || 1;
   this.tick = config.tick || 1000;
   this.curr = 0;
+
+  this.log = function (val) {
+    if (config.log) {
+      log(val);
+    }
+  }
 
   if (this.type === 'fan') {
     this.service = new Service.Fanv2(this.name, "Timer");
